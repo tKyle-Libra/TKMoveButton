@@ -64,6 +64,31 @@
          *  移动按钮到当前触摸位置
          */
         CGPoint newCenter = CGPointMake(currentPoint.x + _xDistance, currentPoint.y + _yDistance);
+        
+        CGFloat superViewWidth = CGRectGetWidth([self superview].frame);
+        CGFloat superViewHeight = CGRectGetHeight([self superview].frame);
+        CGFloat selfWidth = CGRectGetWidth(self.frame);
+        CGFloat selfHeight = CGRectGetHeight(self.frame);
+
+        if (newCenter.x > (superViewWidth-selfWidth))
+        {
+            newCenter.x = superViewWidth-selfWidth;
+        }
+        if (newCenter.y > (superViewHeight-selfHeight))
+        {
+            newCenter.y = superViewHeight-selfHeight;
+        }
+        if (newCenter.x < selfWidth)
+        {
+            newCenter.x = selfWidth;
+        }
+        if (newCenter.y < selfHeight)
+        {
+            newCenter.y = selfHeight;
+        }
+        
+        NSLog(@"newCenter x = %f , newCenter y = %f",newCenter.x,newCenter.y);
+        
         self.center = newCenter;
     }
 }
